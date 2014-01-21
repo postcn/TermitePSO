@@ -31,8 +31,8 @@ public class Termite {
 		for (Direction i: g.getDirections()) {
 			probs.set(i, g.getElevation(x,y)*1/pImportance + pImportance*g.getPheromones(x,y));
 			sum += probs.get(i);
+			i++;
 		}
-		int i;
 		for (i=0; i<probs.size(); i++) {
 			probs.set(i, probs.get(i)/sum);
 		}

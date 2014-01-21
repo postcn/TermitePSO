@@ -1,0 +1,33 @@
+
+public class Termite {
+	int x;
+	int y;
+	double pStrength;
+	int movesLeft;
+	
+	public Termite(int x, int y, double pStrength, int moves) {
+		this.x = x;
+		this.y = y;
+		this.pStrength = pStrength;
+		this.movesLeft = moves;
+	}
+	
+	public Termite(int x, int y, double pStrength) {
+		this(x, y, pStrength,Integer.MAX_VALUE);
+	}
+	
+	public void move(Grid g) {
+		//Takes grid and determines where to move
+		//Move to location on grid
+		//Only lay pheromones at end of each turn.
+	}
+	
+	public void readPheromones(Grid g) {
+		//Used for determining direction on grid
+		//Process the pheromone information
+	}
+	
+	public void layPheromones() {
+		
+	}
+}

@@ -1,0 +1,12 @@
+
+public class Termite {
+	int x;
+	int y;
+	double pStrength;
+	
+	public Termite(int x, int y, double pStrength) {
+		this.x = x;
+		this.y = y;
+		this.pStrength = pStrength;
+	}
+}

@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-import java.util.Random;
+
 
 public class Termite {
 	int x;
@@ -7,8 +7,6 @@ public class Termite {
 	double pStrength;
 	int movesLeft;
 	double pImportance;
-	
-	public enum Direction {NORTH, SOUTH, EAST, WEST};
 	
 	public Termite(int x, int y, double pStrength, int moves, double pImportance) {
 		this.x = x;
@@ -27,25 +25,12 @@ public class Termite {
 		//Move to location on grid
 		//Only lay pheromones at end of each turn.
 		ArrayList<Double> probs = new ArrayList<Double>();
-		double sum = 0;
-		for (Direction i: g.getDirections()) {
+		double sum;
+		for Direction in g.getDirections(): {
 			probs.set(i, g.getElevation(x,y)*1/pImportance + pImportance*g.getPheromones(x,y));
 			sum += probs.get(i);
+			i++;
 		}
-		int i;
-		for (i=0; i<probs.size(); i++) {
-			probs.set(i, probs.get(i)/sum);
-		}
-		
-		Random r = new Random();
-		double d = r.nextDouble();
-		for (i=0; i<probs.size(); i++) {
-			if (d<probs.get(i)) {
-				break;
-			}
-		}
-		
-		//Go direction i;
 	}
 	
 	public void readPheromones(Grid g, int direction) {

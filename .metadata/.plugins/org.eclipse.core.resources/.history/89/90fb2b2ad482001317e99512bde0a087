@@ -1,0 +1,11 @@
+
+public class Termite {
+	int x;
+	int y;
+	int currentLevel;
+	
+	public Termite(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
+}
