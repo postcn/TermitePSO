@@ -28,6 +28,7 @@ public class Termite {
 		ArrayList<Double> probs = new ArrayList<Double>();
 		double sum = 0;
 		for (Grid.Direction i: g.getDirections()) {
+			int j = (int)i;
 			probs.set(i, g.getElevation(x,y)*1/pImportance + pImportance*readPheromones(g, i));
 			sum += probs.get(i);
 		}

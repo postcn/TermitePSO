@@ -14,5 +14,4 @@ public class Grid {
 	public int getElevation(int x, int y) {
 		return elevations.get(x).get(y);
 	}
-	
 }

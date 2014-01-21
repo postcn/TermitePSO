@@ -10,9 +10,4 @@ public class Grid {
 	public ArrayList<Direction> getDirections() {
 		return new ArrayList<Direction>();
 	}
-	
-	public int getElevation(int x, int y) {
-		return elevations.get(x).get(y);
-	}
-	
 }

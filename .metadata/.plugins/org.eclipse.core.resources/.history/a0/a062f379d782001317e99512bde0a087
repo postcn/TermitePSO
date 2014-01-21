@@ -28,7 +28,7 @@ public class Termite {
 		ArrayList<Double> probs = new ArrayList<Double>();
 		double sum = 0;
 		for (Grid.Direction i: g.getDirections()) {
-			probs.set(i, g.getElevation(x,y)*1/pImportance + pImportance*readPheromones(g, i));
+			probs.set(i, g.getElevation(x,y)*1/pImportance + pImportance*g.getPheromones(x,y));
 			sum += probs.get(i);
 		}
 		int i;
@@ -47,10 +47,9 @@ public class Termite {
 		//Go direction i;
 	}
 	
-	public double readPheromones(Grid g, Grid.Direction direction) {
+	public void readPheromones(Grid g, int direction) {
 		//Used for determining direction on grid
 		//Process the pheromone information
-		return 0;
 	}
 	
 	public void layPheromones(Grid g) {

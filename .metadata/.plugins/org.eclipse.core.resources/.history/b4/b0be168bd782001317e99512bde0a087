@@ -47,10 +47,9 @@ public class Termite {
 		//Go direction i;
 	}
 	
-	public double readPheromones(Grid g, Grid.Direction direction) {
+	public double readPheromones(Grid g, int direction) {
 		//Used for determining direction on grid
 		//Process the pheromone information
-		return 0;
 	}
 	
 	public void layPheromones(Grid g) {
