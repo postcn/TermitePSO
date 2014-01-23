@@ -1,0 +1,35 @@
+import java.util.ArrayList;
+
+
+public class Grid {
+	private ArrayList<ArrayList<Integer>> elevations;
+	private ArrayList<ArrayList<Double>> pheromones;
+	
+	public enum Direction {NORTH(0), SOUTH(1), EAST(2), WEST(3);
+	private final int value;
+	private Direction(int value) {
+		this.value = value;
+	}
+	
+	public Grid() {
+		this.elevations = new ArrayList<ArrayList<Integer>>();
+	}
+	
+	public int getValue() {
+		return value;
+	}
+	}
+	
+	public ArrayList<Direction> getDirections() {
+		return new ArrayList<Direction>();
+	}
+	
+	public int getElevation(int x, int y) {
+		return elevations.get(x).get(y);
+	}
+	
+	public double getPheromones(int x, int y) {
+		return pheromones.get(x).get(y);
+	}
+	
+}
