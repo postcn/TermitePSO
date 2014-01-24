@@ -18,7 +18,8 @@ public class Termite {
 	}
 	
 	public Termite(int x, int y, double pStrength, double pImportance) {
-		this(x, y, pStrength,Integer.MAX_VALUE, pImportance);
+//		this(x, y, pStrength,Integer.MAX_VALUE, pImportance);
+		this(x, y, pStrength,10, pImportance);
 	}
 	
 	public void move(Grid g) {
@@ -27,8 +28,8 @@ public class Termite {
 		//Only lay pheromones at end of each turn.
 		ArrayList<Double> probs = new ArrayList<Double>();
 		double sum = 0;
-		for (Grid.Direction i: g.getDirections()) {
-			probs.set(i.getValue(), g.getElevation(x,y)*1/pImportance + pImportance*readPheromones(g, i));
+		for (Grid.Direction i: g.getDirections(this.x, this.y)) {
+			probs.set(i.getValue(), g.getElevation(x+i.changeX(),y + i.changeY())*1/pImportance + pImportance*readPheromones(g, i));
 			sum += probs.get(i.getValue());
 		}
 		int i;
@@ -44,7 +45,10 @@ public class Termite {
 			}
 		}
 		
-		//Go direction i;
+		Grid.Direction move = Grid.Direction.getDirection(i);
+		this.x += move.changeX();
+		this.y += move.changeY();
+		this.movesLeft--;
 	}
 	
 	public double readPheromones(Grid g, Grid.Direction direction) {
@@ -55,5 +59,6 @@ public class Termite {
 	
 	public void layPheromones(Grid g) {
 		//Update pheromones at grid location.
+		g.addPheromone(x,y, pStrength);
 	}
 }
