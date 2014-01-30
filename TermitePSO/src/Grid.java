@@ -2,22 +2,46 @@ import java.util.ArrayList;
 import java.util.Random;
 
 
+/**
+ * Defines the Grid upon which the termites will search for maximum values.
+ */
 public class Grid {
 	private ArrayList<ArrayList<Integer>> elevations;
 	private ArrayList<ArrayList<Double>> pheromones;
 	
+	/**
+	 * Defines the four directions a termite may move on the grid.
+	 */
 	public enum Direction {STAY(0), NORTH(1), SOUTH(2), EAST(3), WEST(4);
+	
 	private final int value;
+	
 	private Direction(int value) {
 		this.value = value;
 	}
+	/**
+	 * TODO Put here a description of what this method does.
+	 *
+	 * @param value
+	 * @return
+	 */
 	public static Direction getDirection(int value) {
 		return Direction.values()[value];
 	}
+	/**
+	 * TODO Put here a description of what this method does.
+	 *
+	 * @return
+	 */
 	public int getValue() {
-		return value;
+		return this.value;
 	}
 	
+	/**
+	 * TODO Put here a description of what this method does.
+	 *
+	 * @return
+	 */
 	public int changeX() {
 		if (this == STAY || this == SOUTH || this == NORTH) {
 			return 0;
@@ -31,6 +55,11 @@ public class Grid {
 		return 0;
 	}
 	
+	/**
+	 * TODO Put here a description of what this method does.
+	 *
+	 * @return
+	 */
 	public int changeY() {
 		if (this == STAY || this == EAST || this == WEST) {
 			return 0;
@@ -45,48 +74,81 @@ public class Grid {
 	}
 	}
 	
+	/**
+	 * @param x
+	 * @param y
+	 * @return All possible directions a termite can travel.
+	 */
 	public ArrayList<Direction> getDirections(int x,int y) {
 		return new ArrayList<Direction>();
 	}
 	
+	/**
+	 * Default constructor initializes a blank list to store the elevations
+	 * of each space and another to store each of the pheromone levels.
+	 */
 	public Grid() {
 		this.elevations = new ArrayList<ArrayList<Integer>>();
 		this.pheromones = new ArrayList<ArrayList<Double>>();
 	}
 	
+	/**
+	 * Creates a, x by y grid.
+	 *
+	 * @param x
+	 * @param y
+	 */
 	public void setSize(int x, int y) {
 		for(int i=0; i<x; i++) {
-			elevations.add(new ArrayList<Integer>());
-			pheromones.add(new ArrayList<Double>());
+			this.elevations.add(new ArrayList<Integer>());
+			this.pheromones.add(new ArrayList<Double>());
 			for(int j=0; j<y; j++) {
-				elevations.get(i).add(0);
-				pheromones.get(i).add(0.0);
+				this.elevations.get(i).add(0);
+				this.pheromones.get(i).add(0.0);
 			}
 		}
 	}
 	
+	/**
+	 * Sets the value of each elevation to a random value.
+	 *
+	 */
 	public void setRandomValues() {
 		
-		for (int i=0; i<elevations.size(); i++) {
+		for (int i=0; i<this.elevations.size(); i++) {
 			Random r = new Random();
-			for (int j=0; j<elevations.get(i).size(); j++) {
+			for (int j=0; j<this.elevations.get(i).size(); j++) {
 				int temp = r.nextInt(100);
-				elevations.get(i).set(j, temp);
+				this.elevations.get(i).set(j, temp);
 			}
 		}
 	}
 	
+	/**
+	 * @param x
+	 * @param y
+	 * @return The elevation of point (x,y)
+	 */
 	public int getElevation(int x, int y) {
-		return elevations.get(x).get(y);
+		return this.elevations.get(x).get(y);
 	}
 	
+	/**
+	 * @param x
+	 * @param y
+	 * @return The amount of pheromone on space (x,y)
+	 */
 	public double getPheromones(int x, int y) {
-		return pheromones.get(x).get(y);
+		return this.pheromones.get(x).get(y);
 	}
 	
+	/**
+	 * Prints out a text representation of the grid.
+	 *
+	 */
 	public void printGrid() {
-		for(int i=0; i< elevations.size(); i++) {
-			ArrayList<Integer> row = elevations.get(i);
+		for(int i=0; i< this.elevations.size(); i++) {
+			ArrayList<Integer> row = this.elevations.get(i);
 			for (int j=0; j<row.size(); j++) {
 				System.out.print(row.get(j) + " ");
 			}
@@ -94,9 +156,13 @@ public class Grid {
 		}
 	}
 	
+	/**
+	 * Prints out a list of all pheromone levels.
+	 *
+	 */
 	public void printPheromones() {
-		for(int i=0; i< pheromones.size(); i++) {
-			ArrayList<Double> row = pheromones.get(i);
+		for(int i=0; i< this.pheromones.size(); i++) {
+			ArrayList<Double> row = this.pheromones.get(i);
 			for (int j=0; j<row.size(); j++) {
 				System.out.print(row.get(j) + " ");
 			}
@@ -104,6 +170,13 @@ public class Grid {
 		}
 	}
 	
+	/**
+	 * Adds the specified amount of pheromone to space (x,y) on the grid.
+	 *
+	 * @param x
+	 * @param y
+	 * @param amount
+	 */
 	public void addPheromone(int x,int y, double amount) {
 		this.pheromones.get(x).set(y,this.pheromones.get(x).get(y)+amount);
 	}

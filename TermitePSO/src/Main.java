@@ -1,9 +1,16 @@
 import java.util.ArrayList;
 import java.util.Random;
 
-
+/**
+ * Begins our termite approach to PSO.
+ */
 public class Main {
 
+	/**
+	 * TODO Put here a description of what this method does.
+	 *
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		Grid g = new Grid();
 		g.setSize(10, 10);
@@ -27,7 +34,7 @@ public class Main {
 		}
 		
 		
-			while(termites.get(0).movesLeft > 0) {
+			while(termites.get(0).getMovesLeft() > 0) {
 				for (Termite t: termites) {
 					t.move(g);
 				}
