@@ -45,15 +45,13 @@ public class Termite {
 	
 	
 	/**
-	 * Changes this termite's position on the board. This requires updating both
-	 * the termite's stored position and the grid's stored position for this termite.
+	 * Takes grid and determines where to move and moves there.
+	 * Only lay pheromones at end of each turn (determined by the calling function).
 	 *
 	 * @param g
 	 */
 	public void move(Grid g) {
-		//Takes grid and determines where to move
-		//Move to location on grid
-		//Only lay pheromones at end of each turn.
+		
 		ArrayList<Double> probs = new ArrayList<Double>();
 		double sum = 0;
 		for (Grid.Direction i: g.getDirections(this.getX(), this.getY())) {

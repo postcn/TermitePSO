@@ -20,10 +20,8 @@ public class Grid {
 		this.value = value;
 	}
 	/**
-	 * TODO Put here a description of what this method does.
-	 *
 	 * @param value
-	 * @return
+	 * @return The direction associated with the given integer.
 	 */
 	public static Direction getDirection(int value) {
 		return Direction.values()[value];

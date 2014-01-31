@@ -7,7 +7,7 @@ import java.util.Random;
 public class Main {
 
 	/**
-	 * TODO Put here a description of what this method does.
+	 * Initializes the termite program.
 	 *
 	 * @param args
 	 */
@@ -25,31 +25,56 @@ public class Main {
 		double pStrength = 5;
 		int moves = 5;
 		double pImportance = 0.1;
+		
+		basicSearch(numTermites, iterations, pStrength, moves, pImportance, g);
+		
+
+		
+	}
+
+	/**
+	 * Generates termites to move around the grid on their own subject to the
+	 * following constraints.
+	 *
+	 * @param numTermites - Total number of termites to use.
+	 * @param iterations - Number of rounds in which each termite will be able to move.
+	 * @param pStrength - The strength of each termites pheromone.
+	 * @param moves - The number of moves allotted to each termite each iteration.
+	 * @param pImportance - The importance of each termites pheromone.
+	 * @param g - The grid to be searched.
+	 */
+	private static void basicSearch(int numTermites, int iterations,
+			double pStrength, int moves, double pImportance, Grid g) {
+		
 		Random r = new Random();
 		
+		System.out.println("-------Beginning basic search-------");
 		while (iterations>0) {
 			ArrayList<Termite> termites = new ArrayList<Termite>();
-		for (int i=0; i<numTermites; i++) {
-			int x = r.nextInt(10);
-			int y = r.nextInt(10);
-			termites.add(new Termite(x,y,pStrength,moves,pImportance));
-		}
 		
+			//Generate the termites for this iteration
+			for (int i=0; i<numTermites; i++) {
+				int x = r.nextInt(10);
+				int y = r.nextInt(10);
+				termites.add(new Termite(x,y,pStrength,moves,pImportance));
+			}
 		
+			//Let each termite move once, if it has at least one remaining move
 			while(termites.get(0).getMovesLeft() > 0) {
 				for (Termite t: termites) {
 					t.move(g);
 				}
 			}
+			//Lay pheromone after each termite has moved
 			for (Termite t: termites) {
 				t.layPheromones(g);
 			}
+			//Print the results of this iteration and prepare for the next
 			iterations--;
 			System.out.println("Pheromones after iteration " + iterations);
 			g.printPheromones();
 			System.out.println("-----------------------------");
 		}
-		
 	}
 
 }
