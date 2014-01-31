@@ -80,10 +80,11 @@ public class Termite {
 	
 	/**
 	 * Examines the pheromones currently on the grid.
+	 * Uses one of multiple functions of achieve this in different ways.
 	 *
 	 * @param g
 	 * @param direction
-	 * @return
+	 * @return The pheromone level detected in the given direction.
 	 */
 	public double readPheromones(Grid g, Grid.Direction direction) {
 		//Used for determining direction on grid

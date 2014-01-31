@@ -26,10 +26,7 @@ public class Main {
 		int moves = 5;
 		double pImportance = 0.1;
 		
-		basicSearch(numTermites, iterations, pStrength, moves, pImportance, g);
-		
-
-		
+		basicSearch(numTermites, iterations, pStrength, moves, pImportance, g);		
 	}
 
 	/**
