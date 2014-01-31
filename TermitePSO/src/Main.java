@@ -26,7 +26,7 @@ public class Main {
 		int moves = 5;
 		double pImportance = 0.1;
 		
-		basicSearch(numTermites, iterations, pStrength, moves, pImportance, g);		
+		randomSearch(numTermites, iterations, pStrength, moves, pImportance, g);		
 	}
 
 	/**
@@ -40,12 +40,12 @@ public class Main {
 	 * @param pImportance - The importance of each termites pheromone.
 	 * @param g - The grid to be searched.
 	 */
-	private static void basicSearch(int numTermites, int iterations,
+	private static void randomSearch(int numTermites, int iterations,
 			double pStrength, int moves, double pImportance, Grid g) {
 		
 		Random r = new Random();
 		
-		System.out.println("-------Beginning basic search-------");
+		System.out.println("-------Beginning random search-------");
 		while (iterations>0) {
 			ArrayList<Termite> termites = new ArrayList<Termite>();
 		
@@ -73,5 +73,4 @@ public class Main {
 			System.out.println("-----------------------------");
 		}
 	}
-
 }

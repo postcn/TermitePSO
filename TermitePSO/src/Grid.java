@@ -78,21 +78,22 @@ public class Grid {
 	 * @return All possible directions a termite can travel.
 	 */
 	public ArrayList<Direction> getDirections(int x, int y) {
+		ArrayList<Direction> valid = new ArrayList<Direction>();
 		//Add north, if the termite is not on the top row
 		if(y != 0){
-			
+			valid.add(Direction.NORTH);
 		}
 		//Add south, if the termite is not on the bottom row
 		if(y == this.elevations.get(0).size() - 1){
-			
+			valid.add(Direction.SOUTH);
 		}
 		//Add east, if the termite is not on the rightmost column
 		if(x == this.elevations.size() - 1){
-			
+			valid.add(Direction.EAST);
 		}
 		//Add west, if the termite is not on the leftmost column
 		if(x != 0){
-			
+			valid.add(Direction.WEST);
 		}
 		return new ArrayList<Direction>();
 	}
@@ -107,7 +108,7 @@ public class Grid {
 	}
 	
 	/**
-	 * Creates a, x by y grid.
+	 * Creates an x by y grid.
 	 *
 	 * @param x
 	 * @param y
