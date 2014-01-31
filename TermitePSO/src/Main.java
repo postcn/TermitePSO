@@ -15,7 +15,9 @@ public class Main {
 		Grid g = new Grid();
 		g.setSize(10, 10);
 		g.setRandomValues();
+		System.out.println("Printing the grid below:");
 		g.printGrid();
+		System.out.println("-------------------------");
 			
 		int numTermites = 20;
 		int iterations = 10;
@@ -43,8 +45,9 @@ public class Main {
 				t.layPheromones(g);
 			}
 			iterations--;
+			System.out.println("Pheromones after iteration " + iterations);
 			g.printPheromones();
-			System.out.println("-----");
+			System.out.println("-----------------------------");
 		}
 		
 	}

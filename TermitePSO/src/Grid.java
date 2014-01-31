@@ -143,14 +143,19 @@ public class Grid {
 	}
 	
 	/**
-	 * Prints out a text representation of the grid.
+	 * Prints out a text representation of the grid's elevations.
 	 *
 	 */
 	public void printGrid() {
 		for(int i=0; i< this.elevations.size(); i++) {
 			ArrayList<Integer> row = this.elevations.get(i);
 			for (int j=0; j<row.size(); j++) {
-				System.out.print(row.get(j) + " ");
+				if(row.get(j) < 10){//Improve readability by evening the spacing
+					System.out.print(" " + row.get(j) + " ");
+				}
+				else{
+					System.out.print(row.get(j) + " ");
+				}
 			}
 			System.out.print("\n");
 		}
@@ -164,7 +169,12 @@ public class Grid {
 		for(int i=0; i< this.pheromones.size(); i++) {
 			ArrayList<Double> row = this.pheromones.get(i);
 			for (int j=0; j<row.size(); j++) {
-				System.out.print(row.get(j) + " ");
+				if(row.get(j) < 10){//Improve readability by evening the spacing
+					System.out.print(" " + row.get(j) + " ");
+				}
+				else{
+					System.out.print(row.get(j) + " ");
+				}
 			}
 			System.out.print("\n");
 		}
