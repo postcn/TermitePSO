@@ -18,8 +18,8 @@ public class Termite {
 	 *
 	 * @param x - The x coordinate representing this termite's position.
 	 * @param y - The y coordinate representing this termite's position.
-	 * @param pStrength - How many layers of pheromon this termite lays	TODO double check
-	 * @param pImportance - How important this termite's pheromone is
+	 * @param pStrength - How strong the termite's pheromone is
+	 * @param pImportance - Represents the importance ratio between pheromone and distance
 	 */
 	public Termite(int x, int y, double pStrength, double pImportance) {
 //		this(x, y, pStrength,Integer.MAX_VALUE, pImportance);
@@ -31,9 +31,9 @@ public class Termite {
 	 *
 	 * @param x - The x coordinate representing this termite's position.
 	 * @param y - The y coordinate representing this termite's position.
-	 * @param pStrength - The strength of this termite's pheromone relative to other termites.
+	 * @param pStrength - The strength of this termite's pheromone
 	 * @param moves - The number of moves this termite can make.
-	 * @param pImportance - The importance of this termite's pheromone relative to other termites.
+	 * @param pImportance - Represents the importance ratio between pheromone and distance
 	 */
 	public Termite(int x, int y, double pStrength, int moves, double pImportance) {
 		this.setX(x);
@@ -89,6 +89,7 @@ public class Termite {
 	public double readPheromones(Grid g, Grid.Direction direction) {
 		//Used for determining direction on grid
 		//Process the pheromone information
+		//TODO tests varying the result of this function
 		return 0;
 	}
 	
@@ -98,6 +99,7 @@ public class Termite {
 	 * @param g
 	 */
 	public void layPheromones(Grid g) {
+		//TODO tests varying ways to add to this pheromone
 		//Update pheromones at grid location.
 		g.addPheromone(this.getX(), this.getY(), this.getpStrength());
 	}
