@@ -10,8 +10,8 @@ public class Grid {
 	private ArrayList<ArrayList<Double>> pheromones;
 	private int maxX;
 	private int maxY;
-	private int resultX=-1;
-	private int resultY=-1;
+	private int resultX;
+	private int resultY;
 	
 	/**
 	 * Defines the four directions a termite may move on the grid.
@@ -246,18 +246,9 @@ public class Grid {
 	}
 	
 	public double getAccuracy() {
-		if (resultX == -1) {
-			this.getResultPosition();
-		}
 		int sizeX = this.pheromones.size();
 		int sizeY = this.pheromones.get(0).size();
-		double perX = Math.abs(maxX - resultX)/(double)sizeX;
-		double perY = Math.abs(maxY-resultY)/(double)sizeY;
-		//these are degrees of error.
-		perX = 1-perX;
-		perY = 1-perY;
-		//Now they are degrees of accuracy
-		double overall = ((perX+perY)/2)*100;
-		return overall;
+		double perX = Math.abs(maxX - resultX)/sizeX;
+		double perY = Math.abs(maxY-resultY)/sizeY;
 	}
 }

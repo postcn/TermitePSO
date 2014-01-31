@@ -246,7 +246,7 @@ public class Grid {
 	}
 	
 	public double getAccuracy() {
-		if (resultX == -1) {
+		if (resultX = -1) {
 			this.getResultPosition();
 		}
 		int sizeX = this.pheromones.size();

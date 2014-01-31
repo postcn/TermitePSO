@@ -13,7 +13,7 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		ArrayList<Double> results = new ArrayList<Double>();
-		int runs = 100;
+		int runs = 1000;
 		for (int i=0; i<runs; i++) {
 			Grid g = new Grid();
 			g.setSize(10, 10);
@@ -23,11 +23,11 @@ public class Main {
 			System.out.println("-------------------------");
 				
 			int numTermites = 20;
-			int iterations = 100;
+			int iterations = 1000;
 			
 			double pStrength = 5;
 			int moves = 10;
-			double pImportance = 0.3;
+			double pImportance = 0.1;
 			double decayRate = 0.15;
 			
 			results.add(randomSearch(numTermites, iterations, pStrength, moves, pImportance, g, decayRate));	
@@ -37,7 +37,6 @@ public class Main {
 			accuracy += d;
 		}
 		accuracy = accuracy / (double) results.size();
-		System.out.println("Termites ran an average of " + accuracy+"% accuracy.");
 	}
 
 	/**
