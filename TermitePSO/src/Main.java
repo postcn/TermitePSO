@@ -20,13 +20,14 @@ public class Main {
 		System.out.println("-------------------------");
 			
 		int numTermites = 20;
-		int iterations = 10;
+		int iterations = 1000;
 		
 		double pStrength = 5;
-		int moves = 5;
+		int moves = 10;
 		double pImportance = 0.1;
+		double decayRate = 0.15;
 		
-		randomSearch(numTermites, iterations, pStrength, moves, pImportance, g);		
+		randomSearch(numTermites, iterations, pStrength, moves, pImportance, g, decayRate);		
 	}
 
 	/**
@@ -41,7 +42,7 @@ public class Main {
 	 * @param g - The grid to be searched.
 	 */
 	private static void randomSearch(int numTermites, int iterations,
-			double pStrength, int moves, double pImportance, Grid g) {
+			double pStrength, int moves, double pImportance, Grid g, double decay) {
 		
 		Random r = new Random();
 		
@@ -70,7 +71,11 @@ public class Main {
 			iterations--;
 			System.out.println("Pheromones after iteration " + iterations);
 			g.printPheromones();
+			g.decayPheromones(decay);
 			System.out.println("-----------------------------");
 		}
+		g.printGrid();
+		g.printPheromones();
+		g.getResultPosition();
 	}
 }

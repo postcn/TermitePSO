@@ -1,0 +1,59 @@
+import net.sourceforge.cilib.problem.Fitness;
+import net.sourceforge.cilib.problem.OptimisationProblem;
+import net.sourceforge.cilib.problem.ProblemVisitor;
+import net.sourceforge.cilib.problem.dataset.DataSetBuilder;
+import net.sourceforge.cilib.type.DomainRegistry;
+import net.sourceforge.cilib.type.types.Type;
+
+
+public class GridAdapter implements OptimisationProblem {
+
+	@Override
+	public void changeEnvironment() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void accept(ProblemVisitor arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public OptimisationProblem getClone() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public DataSetBuilder getDataSetBuilder() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public DomainRegistry getDomain() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Fitness getFitness(Type arg0) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getFitnessEvaluations() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setDataSetBuilder(DataSetBuilder arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

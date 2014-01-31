@@ -206,4 +206,32 @@ public class Grid {
 		this.pheromones.get(x).set(y,this.pheromones.get(x).get(y)+amount);
 	}
 	
+	public void getResultPosition() {
+		double bestAmount = -1000;
+		int x = -1;
+		int y = -1;
+		for(int i=0; i< this.pheromones.size(); i++) {
+			ArrayList<Double> row = this.pheromones.get(i);
+			for (int j=0; j<row.size(); j++) {
+				double test = row.get(j);
+				if (test>bestAmount) {
+					bestAmount = test;
+					x=i;
+					y=j;
+				}
+			}
+		}
+		
+		System.out.println("Termites reported ("+x+","+y+") as the best position");
+	}
+	
+	public void decayPheromones(double rate) {
+		for(int i=0; i< this.pheromones.size(); i++) {
+			ArrayList<Double> row = this.pheromones.get(i);
+			for (int j=0; j<row.size(); j++) {
+				row.set(j, row.get(j)*(1-rate));
+			}
+		}
+	}
+	
 }

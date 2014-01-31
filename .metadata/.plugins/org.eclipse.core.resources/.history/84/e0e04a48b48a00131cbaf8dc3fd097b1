@@ -1,0 +1,6 @@
+
+public class Particle {
+	int vectorX;
+	int vectorY;
+	Point bestFound;
+}
