@@ -155,6 +155,9 @@ public class Grid {
 	 * @return The elevation of point (x,y)
 	 */
 	public int getElevation(int x, int y) {
+		if (x < 0 || y< 0) {
+			return -100;
+		}
 		return this.elevations.get(x).get(y);
 	}
 	
@@ -233,7 +236,7 @@ public class Grid {
 		}
 		resultX = x;
 		resultY = y;
-		System.out.println("Termites reported ("+x+","+y+") as the best position");
+//		System.out.println("Termites reported ("+x+","+y+") as the best position");
 	}
 	
 	public void decayPheromones(double rate) {
@@ -259,5 +262,26 @@ public class Grid {
 		//Now they are degrees of accuracy
 		double overall = ((perX+perY)/2)*100;
 		return overall;
+	}
+	
+	public double getAccuracy(Point p) {
+		int sizeX = this.pheromones.size();
+		int sizeY = this.pheromones.get(0).size();
+		double perX = Math.abs(maxX - p.xPos)/(double)sizeX;
+		double perY = Math.abs(maxY- p.yPos)/(double)sizeY;
+		//these are degrees of error.
+		perX = 1-perX;
+		perY = 1-perY;
+		//Now they are degrees of accuracy
+		double overall = ((perX+perY)/2)*100;
+		return overall;
+	}
+	
+	public int getXSize() {
+		return this.elevations.size();
+	}
+	
+	public int getYSize() {
+		return this.elevations.get(0).size();
 	}
 }

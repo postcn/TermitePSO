@@ -13,14 +13,15 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		ArrayList<Double> results = new ArrayList<Double>();
+		ArrayList<Double> psoResults = new ArrayList<Double>(); 
 		int runs = 100;
 		for (int i=0; i<runs; i++) {
 			Grid g = new Grid();
 			g.setSize(10, 10);
 			g.setRandomValues();
-			System.out.println("Printing the grid below:");
-			g.printGrid();
-			System.out.println("-------------------------");
+//			System.out.println("Printing the grid below:");
+//			g.printGrid();
+//			System.out.println("-------------------------");
 				
 			int numTermites = 20;
 			int iterations = 100;
@@ -29,8 +30,12 @@ public class Main {
 			int moves = 10;
 			double pImportance = 0.3;
 			double decayRate = 0.15;
+			double globalStrength = 0.25;
+			double localStrength = 0.25;
+			double randomStrength = 0.15;
 			
-			results.add(randomSearch(numTermites, iterations, pStrength, moves, pImportance, g, decayRate));	
+			results.add(randomSearch(numTermites, iterations, pStrength, moves, pImportance, g, decayRate));
+			psoResults.add(PSOSearch(iterations,numTermites, g,globalStrength,localStrength,randomStrength));
 		}
 		double accuracy = 0;
 		for (Double d : results) {
@@ -38,6 +43,12 @@ public class Main {
 		}
 		accuracy = accuracy / (double) results.size();
 		System.out.println("Termites ran an average of " + accuracy+"% accuracy.");
+		accuracy = 0;
+		for (Double d : psoResults) {
+			accuracy += d;
+		}
+		accuracy = accuracy / (double) results.size();
+		System.out.println("PSO ran an average of " + accuracy+"% accuracy.");
 	}
 
 	/**
@@ -56,7 +67,7 @@ public class Main {
 		
 		Random r = new Random();
 		
-		System.out.println("-------Beginning random search-------");
+//		System.out.println("-------Beginning random search-------");
 		while (iterations>0) {
 			ArrayList<Termite> termites = new ArrayList<Termite>();
 		
@@ -79,11 +90,18 @@ public class Main {
 			}
 			//Print the results of this iteration and prepare for the next
 			iterations--;
-			System.out.println("Pheromones after iteration " + iterations);
-			g.printPheromones();
+//			System.out.println("Pheromones after iteration " + iterations);
+//			g.printPheromones();
 			g.decayPheromones(decay);
-			System.out.println("-----------------------------");
+//			System.out.println("-----------------------------");
 		}
 		return g.getAccuracy();
+	}
+	
+	private static double PSOSearch(int iterations,int numParticles, Grid g, 
+			double globalStrength, double localStrength, double randomStrength) {
+		PSORunner runner = new PSORunner(iterations, numParticles, g, globalStrength, localStrength, randomStrength);
+		Point result = runner.run();
+		return g.getAccuracy(result);
 	}
 }
