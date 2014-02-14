@@ -54,9 +54,14 @@ public class Termite {
 		
 		ArrayList<Double> probs = new ArrayList<Double>();
 		double sum = 0;
-		for (Grid.Direction i: g.getDirections(this.getX(), this.getY())) {
-			probs.set(i.getValue(), g.getElevation(getX()+i.changeX(),getY() +
-					i.changeY())*1/this.getpImportance() + this.getpImportance()*readPheromones(g, i));
+		ArrayList<Grid.Direction> dir = g.getDirections(this.getX(), this.getY());
+		for (int j=0; j<Grid.Direction.values().length; j++) {
+			probs.add(0.0);
+		}
+		for (Grid.Direction i: dir) {
+			double p = readPheromones(g, i);
+			probs.set(i.getValue(), g.getElevation(this.x+i.changeX(),this.y +
+					i.changeY())*1/this.getpImportance() + this.getpImportance()*p);
 			sum += probs.get(i.getValue());
 		}
 		int i;
@@ -66,12 +71,13 @@ public class Termite {
 		
 		Random r = new Random();
 		double d = r.nextDouble();
+		sum = 0.0;
 		for (i=0; i<probs.size(); i++) {
-			if (d<probs.get(i)) {
+			sum += probs.get(i);
+			if (d<sum) {
 				break;
 			}
 		}
-		
 		Grid.Direction move = Grid.Direction.getDirection(i);
 		this.setX(this.getX() + move.changeX());
 		this.setY(this.getY() + move.changeY());
@@ -87,10 +93,24 @@ public class Termite {
 	 * @return The pheromone level detected in the given direction.
 	 */
 	public double readPheromones(Grid g, Grid.Direction direction) {
-		//Used for determining direction on grid
-		//Process the pheromone information
-		//TODO tests varying the result of this function
-		return 0;
+		int testX;
+		int testY;
+		double pher = 0.0;
+		
+		if (direction.changeX() != 0) {
+			for (testX = this.x; testX>=0 && testX < g.getXSize()-1; testX+=direction.changeX()) {
+				pher += g.getPheromones(testX, this.y);
+			}
+		}
+		else if (direction.changeY() != 0) {
+			for (testY=this.y; testY>=0 &&testY < g.getYSize()-1; testY+=direction.changeY()) {
+				pher += g.getPheromones(this.x, testY);
+			}
+		}
+		else {
+			pher = g.getPheromones(this.x, this.y);
+		}
+		return pher;
 	}
 	
 	/**

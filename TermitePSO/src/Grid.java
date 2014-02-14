@@ -85,21 +85,22 @@ public class Grid {
 		ArrayList<Direction> valid = new ArrayList<Direction>();
 		//Add north, if the termite is not on the top row
 		if(y != 0){
-			valid.add(Direction.NORTH);
-		}
-		//Add south, if the termite is not on the bottom row
-		if(y == this.elevations.get(0).size() - 1){
 			valid.add(Direction.SOUTH);
 		}
+		//Add south, if the termite is not on the bottom row
+		if(y < this.elevations.get(0).size() - 1){
+			valid.add(Direction.NORTH);
+		}
 		//Add east, if the termite is not on the rightmost column
-		if(x == this.elevations.size() - 1){
+		if(x < this.elevations.size() - 1){
 			valid.add(Direction.EAST);
 		}
 		//Add west, if the termite is not on the leftmost column
 		if(x != 0){
 			valid.add(Direction.WEST);
 		}
-		return new ArrayList<Direction>();
+		valid.add(Direction.STAY);
+		return valid;
 	}
 	
 	/**
@@ -140,6 +141,34 @@ public class Grid {
 			Random r = new Random();
 			for (int j=0; j<this.elevations.get(i).size(); j++) {
 				int temp = r.nextInt(100);
+				if (temp > maxTemp) {
+					maxX = i;
+					maxY = j;
+				}
+				this.elevations.get(i).set(j, temp);
+			}
+		}
+	}
+	
+	public void setGradientValues(int direction) {
+		//direction > 0 is move right for highest
+		//direction < 0 is move left for highest
+		//direction = 0 is a flat board.
+		Random r = new Random();
+		int startGradient = r.nextInt(this.elevations.size());
+		this.elevations.get(0).set(0, startGradient);
+		maxX = 0;
+		maxY = 0;
+		int maxTemp = startGradient;
+		for (int i=0; i<this.elevations.size(); i++) {
+			for (int j=0; j<this.elevations.get(i).size(); j++) {
+				if (i==0 && j==0) {
+					//starting value
+					continue;
+				}
+				int left = i>0 ? this.elevations.get(i-1).get(j): 0;
+				int top = j>0 ? this.elevations.get(i).get(j-1) : 0;
+				int temp = Math.max(left, top) + direction*5;
 				if (temp > maxTemp) {
 					maxX = i;
 					maxY = j;

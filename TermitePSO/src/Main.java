@@ -1,3 +1,5 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -12,31 +14,66 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		
 		ArrayList<Double> results = new ArrayList<Double>();
 		ArrayList<Double> psoResults = new ArrayList<Double>(); 
+		int numTermites = 20;
+		int iterations = 10;
+		
+		double pStrength = 5;
+		int moves = numTermites;
+		double pImportance = 0.01;
+		double decayRate = 0.15;
+		double globalStrength = 0.25;
+		double localStrength = 0.25;
+		double randomStrength = 0.15;
 		int runs = 100;
-		for (int i=0; i<runs; i++) {
-			Grid g = new Grid();
-			g.setSize(10, 10);
-			g.setRandomValues();
-//			System.out.println("Printing the grid below:");
-//			g.printGrid();
-//			System.out.println("-------------------------");
-				
-			int numTermites = 20;
-			int iterations = 100;
+		for (int size = 10; size<20; size+=10) {
+			moves = size*2;
+			try
+			{
+			    FileWriter writer = new FileWriter("C:\\Users\\postcn\\Documents\\size_"+moves+".csv");
+		 
+			    writer.append("pImportance");
+			    writer.append(',');
+			    writer.append("Result");
+			    writer.append('\n');
+			    
+			    for (int i=0; i<runs*5-1; i++) {
+					double best = 0;
+					pImportance += 0.01;
+					for(int j=0; j<runs; j++) {
+						Grid g = new Grid();
+						g.printGrid();
+						g.setSize(size, size);
+						//g.setRandomValues();
+						g.setGradientValues(1);
+						double test = randomSearch(numTermites, iterations, pStrength, moves, pImportance, g, decayRate);
+						if (test > best) {
+							best = test;
+						}
+					}
+					writer.append(pImportance+"");
+					writer.append(',');
+					writer.append(best+"");
+					writer.append("\n");
+					System.out.println("pImportance: "+ pImportance + " :"+best);
+//					results.add();
+//					psoResults.add(PSOSearch(iterations,numTermites, g,globalStrength,localStrength,randomStrength));
+				}
+		 
+			    //generate whatever data you want
+		 
+			    writer.flush();
+			    writer.close();
+			}
+			catch(IOException e)
+			{
+			     e.printStackTrace();
+			}
 			
-			double pStrength = 5;
-			int moves = 10;
-			double pImportance = 0.3;
-			double decayRate = 0.15;
-			double globalStrength = 0.25;
-			double localStrength = 0.25;
-			double randomStrength = 0.15;
-			
-			results.add(randomSearch(numTermites, iterations, pStrength, moves, pImportance, g, decayRate));
-			psoResults.add(PSOSearch(iterations,numTermites, g,globalStrength,localStrength,randomStrength));
 		}
+		
 		double accuracy = 0;
 		for (Double d : results) {
 			accuracy += d;
